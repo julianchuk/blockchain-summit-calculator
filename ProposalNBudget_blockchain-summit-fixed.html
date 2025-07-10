@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain Summit LATAM 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .flyer-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            max-width: 900px;
+            width: 100%;
+            position: relative;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.1; }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .event-info {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+            text-align: center;
+            border-bottom: 3px solid #dee2e6;
+        }
+
+        .event-details {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .event-detail {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 150px;
+        }
+
+        .event-detail .icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #2a5298;
+        }
+
+        .event-detail .label {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 5px;
+        }
+
+        .event-detail .value {
+            font-size: 1.1em;
+            color: #212529;
+            font-weight: 500;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section h2 {
+            color: #1e3c72;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h2::before {
+            content: '🎯';
+            font-size: 1.2em;
+        }
+
+        .section h2.branding::before {
+            content: '🧩';
+        }
+
+        .branding-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .branding-item {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 3px solid transparent;
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .branding-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(42, 82, 152, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .branding-item:hover::before {
+            left: 100%;
+        }
+
+        .branding-item:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(42, 82, 152, 0.2);
+            border-color: #2a5298;
+        }
+
+        .branding-item.selected {
+            border-color: #28a745;
+            background: linear-gradient(135deg, #f8fff9 0%, #e8f5e8 100%);
+            box-shadow: 0 20px 40px rgba(40, 167, 69, 0.3);
+            transform: translateY(-12px) scale(1.05);
+        }
+
+        .branding-item.selected::after {
+            content: '✓ SELECTED';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 6px 14px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+            animation: bounceIn 0.6s ease;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .branding-item h4 {
+            color: #1e3c72;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .branding-price {
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+            box-shadow: 0 3px 10px rgba(42, 82, 152, 0.3);
+        }
+
+        .branding-item p {
+            color: #6c757d;
+            line-height: 1.4;
+            font-size: 0.95em;
+            position: relative;
+            z-index: 2;
+        }
+
+        .budget-calculator {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            margin: 40px 30px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 2px solid #dee2e6;
+        }
+
+        .budget-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .budget-header h3 {
+            color: #1e3c72;
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .budget-header p {
+            color: #6c757d;
+            font-size: 1.1em;
+        }
+
+        .budget-content {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .selected-items {
+            margin-bottom: 20px;
+            min-height: 50px;
+        }
+
+        .empty-state {
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+            padding: 20px;
+        }
+
+        .selected-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: linear-gradient(135deg, #e8f4ff 0%, #f0f8ff 100%);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 4px solid #2a5298;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .selected-item .item-name {
+            font-weight: 600;
+            color: #1e3c72;
+        }
+
+        .selected-item .item-price {
+            font-weight: 700;
+            color: #2a5298;
+        }
+
+        .selected-item .remove-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .selected-item .remove-btn:hover {
+            background: #c82333;
+            transform: scale(1.1);
+        }
+
+        .discount-section {
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .early-bird {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            border-left: 4px solid #28a745;
+        }
+
+        .early-bird h4 {
+            color: #155724;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .early-bird p {
+            color: #155724;
+            font-size: 0.9em;
+        }
+
+        .coupon-section {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border-left: 4px solid #ffc107;
+        }
+
+        .coupon-section h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .coupon-input {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .coupon-input input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ffc107;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .coupon-input button {
+            background: #ffc107;
+            color: #856404;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .coupon-input button:hover {
+            background: #e0a800;
+        }
+
+        .budget-total {
+            border-top: 2px solid #dee2e6;
+            padding-top: 20px;
+        }
+
+        .total-breakdown {
+            margin-bottom: 15px;
+        }
+
+        .total-line {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .total-line.subtotal {
+            color: #6c757d;
+        }
+
+        .total-line.discount {
+            color: #28a745;
+            font-weight: 600;
+        }
+
+        .total-line.final {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e3c72;
+            border-top: 2px solid #dee2e6;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        .total-line.final span:last-child {
+            color: #28a745;
+        }
+
+        .order-button {
+            width: 100%;
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.3em;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+        }
+
+        .order-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(220, 53, 69, 0.4);
+        }
+
+        .order-button:disabled {
+            background: #6c757d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #343a40 0%, #495057 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .footer h3 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .footer p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-top: 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(40, 167, 69, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .event-details {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .branding-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .coupon-input {
+                flex-direction: column;
+            }
+
+            .coupon-input input,
+            .coupon-input button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="flyer-container">
+        <div class="header">
+            <h1>Blockchain Summit LATAM 2025</h1>
+            <p class="subtitle">Sponsorship & Branding Opportunities</p>
+        </div>
+
+        <div class="event-info">
+            <div class="event-details">
+                <div class="event-detail">
+                    <div class="icon">📍</div>
+                    <div class="label">Location</div>
+                    <div class="value">Medellín, Colombia</div>
+                </div>
+                <div class="event-detail">
+                    <div class="icon">📅</div>
+                    <div class="label">Date</div>
+                    <div class="value">Nov 12-14, 2025</div>
+                </div>
+                <div class="event-detail">
+                    <div class="icon">🎓</div>
+                    <div class="label">Academic Partner</div>
+                    <div class="value">Universidad EAFIT</div>
+                </div>
+                <div class="event-detail">
+                    <div class="icon">🌎</div>
+                    <div class="label">Reach</div>
+                    <div class="value">Global</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2>Sponsorship Packages</h2>
+                <div class="branding-grid">
+                    <div class="branding-item" data-name="Token" data-price="5000">
+                        <h4>Token <span class="branding-price">$5,000</span></h4>
+                        <p>Logo on printed materials, social media mentions, 5 event tickets, panel participation</p>
+                    </div>
+                    <div class="branding-item" data-name="Genesis Block" data-price="10000">
+                        <h4>Genesis Block <span class="branding-price">$10,000</span></h4>
+                        <p>Website logo, networking area banner, 10 VIP tickets, panel participation</p>
+                    </div>
+                    <div class="branding-item" data-name="Miner" data-price="20000">
+                        <h4>Miner <span class="branding-price">$20,000</span></h4>
+                        <p>Main stage logo, premium booth, 20 VIP tickets, 10-min solo talk, hands-on workshop</p>
+                    </div>
+                    <div class="branding-item" data-name="Mainnet" data-price="35000">
+                        <h4>Mainnet <span class="branding-price">$35,000</span></h4>
+                        <p>15-min solo talk, premium booth, 30 VIP tickets, hands-on workshop, exclusive Main Stage seats</p>
+                    </div>
+                    <div class="branding-item" data-name="Master Node" data-price="50000">
+                        <h4>Master Node <span class="branding-price">$50,000</span></h4>
+                        <p>25-min solo talk, premium booth, 50 VIP tickets, hands-on workshop, exclusive Main Stage seats</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="branding">Branded Spaces & Add-Ons</h2>
+                <div class="branding-grid">
+                    <div class="branding-item" data-name="Main Stage" data-price="15000">
+                        <h4>Main Stage <span class="branding-price">$15,000</span></h4>
+                        <p>Complete main auditorium branding (630 pax), screen logo, 20-sec video slots</p>
+                    </div>
+                    <div class="branding-item" data-name="Closing Party" data-price="18000">
+                        <h4>Closing Party <span class="branding-price">$18,000</span></h4>
+                        <p>Complete takeover of main social event with LED screens and VIP access</p>
+                    </div>
+                    <div class="branding-item" data-name="VIP Lounge" data-price="10000">
+                        <h4>VIP Lounge <span class="branding-price">$10,000</span></h4>
+                        <p>Premium networking space with complete brand customization (3 days)</p>
+                    </div>
+                    <div class="branding-item" data-name="Coffee Lounge" data-price="15000">
+                        <h4>Coffee Lounge <span class="branding-price">$15,000</span></h4>
+                        <p>Exclusive outdoor space with premium coffee and networking (3 days)</p>
+                    </div>
+                    <div class="branding-item" data-name="Welcome Cocktail" data-price="10000">
+                        <h4>Welcome Cocktail <span class="branding-price">$10,000</span></h4>
+                        <p>Opening night with signage, bars and lounge areas</p>
+                    </div>
+                    <div class="branding-item" data-name="Coffee Stations" data-price="4000">
+                        <h4>Coffee Stations <span class="branding-price">$4,000</span></h4>
+                        <p>2 exclusive coffee stations inside exhibition hall (3 days)</p>
+                    </div>
+                    <div class="branding-item" data-name="Charging Zone" data-price="6000">
+                        <h4>Charging Zone <span class="branding-price">$6,000</span></h4>
+                        <p>4 charging stations strategically located in each hall corner (3 days)</p>
+                    </div>
+                    <div class="branding-item" data-name="Workshops" data-price="3000">
+                        <h4>Workshops <span class="branding-price">$3,000</span></h4>
+                        <p>Interactive hands-on sessions (50+ professionals, 1-3 hours)</p>
+                    </div>
+                    <div class="branding-item" data-name="Financial Lab" data-price="4000">
+                        <h4>Financial Lab <span class="branding-price">$4,000</span></h4>
+                        <p>Advanced tech environment with Bloomberg terminals (40 participants, 3 hours)</p>
+                    </div>
+                    <div class="branding-item" data-name="WiFi Branding" data-price="5000">
+                        <h4>WiFi Branding <span class="branding-price">$5,000</span></h4>
+                        <p>Custom event WiFi network name and password</p>
+                    </div>
+                    <div class="branding-item" data-name="Online Streaming" data-price="5000">
+                        <h4>Online Streaming <span class="branding-price">$5,000</span></h4>
+                        <p>Logo and 20-sec video during Main Stage live streaming</p>
+                    </div>
+                    <div class="branding-item" data-name="Lanyards" data-price="5000">
+                        <h4>Lanyards <span class="branding-price">$5,000</span></h4>
+                        <p>Exclusive logo on all attendee lanyards during the event</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="budget-calculator">
+            <div class="budget-header">
+                <h3>💰 Budget Calculator</h3>
+                <p>Select the elements above to calculate your total investment</p>
+            </div>
+            <div class="budget-content">
+                <div class="selected-items" id="selectedItems">
+                    <p class="empty-state">No items selected</p>
+                </div>
+                
+                <div class="discount-section early-bird" id="earlyBirdSection" style="display: none;">
+                    <h4>🎉 Early Bird Discount</h4>
+                    <p>20% OFF - Valid for 2 weeks from proposal opening</p>
+                </div>
+
+                <div class="discount-section coupon-section">
+                    <h4>🎫 Coupon Code</h4>
+                    <p>If you have a coupon code, enter it below:</p>
+                    <div class="coupon-input">
+                        <input type="text" id="couponCode" placeholder="Enter coupon code">
+                        <button onclick="applyCoupon()">Apply</button>
+                    </div>
+                    <div id="couponMessage" style="margin-top: 10px; font-weight: 600;"></div>
+                </div>
+
+                <div class="budget-total">
+                    <div class="total-breakdown" id="totalBreakdown" style="display: none;">
+                        <div class="total-line subtotal">
+                            <span>Subtotal:</span>
+                            <span id="subtotalAmount">$0 USD</span>
+                        </div>
+                        <div class="total-line discount" id="earlyBirdLine" style="display: none;">
+                            <span>Early Bird (20%):</span>
+                            <span id="earlyBirdDiscount">-$0 USD</span>
+                        </div>
+                        <div class="total-line discount" id="couponLine" style="display: none;">
+                            <span id="couponLabel">Coupon:</span>
+                            <span id="couponDiscount">-$0 USD</span>
+                        </div>
+                    </div>
+                    <div class="total-line final">
+                        <span>Total Investment:</span>
+                        <span id="totalAmount">$0 USD</span>
+                    </div>
+                    <button class="order-button" id="orderButton" onclick="placeOrder()" disabled>
+                        I WANT IT NOW!
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <h3>Ready to be part of the future of blockchain in LATAM?</h3>
+            <p>Join central banks, regulators and industry leaders in Latin America's most important blockchain event.</p>
+            
+            <div class="contact-info">
+                <p><strong>Contact:</strong> Julian Uribe - CEO BizDevMarketing</p>
+                <p><strong>Public Relations Director:</strong> Blockchain Summit LATAM 2025</p>
+                <a href="https://www.bizdevmarketing.com" target="_blank" class="cta-button">Schedule Meeting</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedItems = [];
+        let earlyBirdActive = true;
+        let appliedCoupon = null;
+
+        const coupons = {
+            'PUBLICRELATIONSGIFT': { discount: 0.10, name: 'Public Relations Gift (10%)' },
+            'VIPPUBLICRELATIONSGIFT': { discount: 0.15, name: 'VIP Public Relations Gift (15%)' }
+        };
+
+        function updateBudget() {
+            const selectedItemsContainer = document.getElementById('selectedItems');
+            const subtotalElement = document.getElementById('subtotalAmount');
+            const totalAmountElement = document.getElementById('totalAmount');
+            const orderButton = document.getElementById('orderButton');
+            const totalBreakdown = document.getElementById('totalBreakdown');
+            const earlyBirdSection = document.getElementById('earlyBirdSection');
+            const earlyBirdLine = document.getElementById('earlyBirdLine');
+            const earlyBirdDiscount = document.getElementById('earlyBirdDiscount');
+            const couponLine = document.getElementById('couponLine');
+            const couponDiscount = document.getElementById('couponDiscount');
+
+            if (selectedItems.length === 0) {
+                selectedItemsContainer.innerHTML = '<p class="empty-state">No items selected</p>';
+                totalAmountElement.textContent = '$0 USD';
+                orderButton.disabled = true;
+                totalBreakdown.style.display = 'none';
+                earlyBirdSection.style.display = 'none';
+                return;
+            }
+
+            selectedItemsContainer.innerHTML = selectedItems.map(item => `
+                <div class="selected-item">
+                    <div>
+                        <span class="item-name">${item.name}</span>
+                    </div>
+                    <div>
+                        <span class="item-price">$${item.price.toLocaleString()} USD</span>
+                        <button class="remove-btn" onclick="removeItem('${item.id}')">×</button>
+                    </div>
+                </div>
+            `).join('');
+
+            const subtotal = selectedItems.reduce((sum, item) => sum + item.price, 0);
+            let totalDiscount = 0;
+            let finalTotal = subtotal;
+
+            totalBreakdown.style.display = 'block';
+            subtotalElement.textContent = `$${subtotal.toLocaleString()} USD`;
+
+            if (earlyBirdActive) {
+                earlyBirdSection.style.display = 'block';
+                earlyBirdLine.style.display = 'flex';
+                const earlyBirdAmount = subtotal * 0.20;
+                totalDiscount += earlyBirdAmount;
+                earlyBirdDiscount.textContent = `-$${earlyBirdAmount.toLocaleString()} USD`;
+            } else {
+                earlyBirdSection.style.display = 'none';
+                earlyBirdLine.style.display = 'none';
+            }
+
+            if (appliedCoupon) {
+                couponLine.style.display = 'flex';
+                const couponAmount = subtotal * appliedCoupon.discount;
+                totalDiscount += couponAmount;
+                couponDiscount.textContent = `-$${couponAmount.toLocaleString()} USD`;
+                document.getElementById('couponLabel').textContent = appliedCoupon.name + ':';
+            } else {
+                couponLine.style.display = 'none';
+            }
+
+            finalTotal = subtotal - totalDiscount;
+            totalAmountElement.textContent = `$${finalTotal.toLocaleString()} USD`;
+            orderButton.disabled = false;
+        }
+
+        function removeItem(itemId) {
+            selectedItems = selectedItems.filter(item => item.id !== itemId);
+            const element = document.querySelector(`[data-name="${itemId}"]`);
+            if (element) {
+                element.classList.remove('selected');
+            }
+            updateBudget();
+        }
+
+        function applyCoupon() {
+            const couponInput = document.getElementById('couponCode');
+            const couponMessage = document.getElementById('couponMessage');
+            const code = couponInput.value.trim().toUpperCase();
+
+            if (coupons[code]) {
+                appliedCoupon = coupons[code];
+                couponMessage.textContent = `✅ Coupon applied: ${appliedCoupon.discount * 100}% discount!`;
+                couponMessage.style.color = '#28a745';
+                couponInput.disabled = true;
+                updateBudget();
+            } else if (code) {
+                couponMessage.textContent = '❌ Invalid coupon code';
+                couponMessage.style.color = '#dc3545';
+            }
+        }
+
+        function generateSummaryImage() {
+            const canvas = document.createElement('canvas');
+            canvas.width = 800;
+            canvas.height = 600;
+            const ctx = canvas.getContext('2d');
+
+            // Background gradient
+            const gradient = ctx.createLinearGradient(0, 0, 800, 600);
+            gradient.addColorStop(0, '#667eea');
+            gradient.addColorStop(1, '#764ba2');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, 800, 600);
+
+            // Header
+            ctx.fillStyle = 'white';
+            ctx.font = 'bold 36px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Blockchain Summit LATAM 2025', 400, 60);
+            
+            ctx.font = '20px Arial';
+            ctx.fillText('Sponsorship Summary', 400, 90);
+
+            // White content area
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.95)';
+            ctx.fillRect(50, 120, 700, 420);
+
+            // Content
+            ctx.fillStyle = '#1e3c72';
+            ctx.font = 'bold 24px Arial';
+            ctx.textAlign = 'left';
+            ctx.fillText('Selected Items:', 80, 160);
+
+            let y = 190;
+            ctx.font = '18px Arial';
+            selectedItems.forEach(item => {
+                ctx.fillText(`• ${item.name}: ${item.price.toLocaleString()} USD`, 100, y);
+                y += 30;
+            });
+
+            // Pricing breakdown
+            const subtotal = selectedItems.reduce((sum, item) => sum + item.price, 0);
+            let totalDiscount = 0;
+
+            y += 20;
+            ctx.font = 'bold 20px Arial';
+            ctx.fillText('Pricing Breakdown:', 80, y);
+            y += 30;
+
+            ctx.font = '18px Arial';
+            ctx.fillText(`Subtotal: ${subtotal.toLocaleString()} USD`, 100, y);
+            y += 25;
+
+            if (earlyBirdActive) {
+                const earlyBirdAmount = subtotal * 0.20;
+                totalDiscount += earlyBirdAmount;
+                ctx.fillStyle = '#28a745';
+                ctx.fillText(`Early Bird (20%): -${earlyBirdAmount.toLocaleString()} USD`, 100, y);
+                y += 25;
+            }
+
+            if (appliedCoupon) {
+                const couponAmount = subtotal * appliedCoupon.discount;
+                totalDiscount += couponAmount;
+                ctx.fillStyle = '#28a745';
+                ctx.fillText(`${appliedCoupon.name}: -${couponAmount.toLocaleString()} USD`, 100, y);
+                y += 25;
+            }
+
+            const finalTotal = subtotal - totalDiscount;
+            
+            // Final total
+            ctx.fillStyle = '#1e3c72';
+            ctx.font = 'bold 24px Arial';
+            y += 20;
+            ctx.fillText(`TOTAL INVESTMENT: ${finalTotal.toLocaleString()} USD`, 100, y);
+
+            // Footer
+            ctx.fillStyle = 'white';
+            ctx.font = '16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Contact: r@blockchainsummit.la', 400, 570);
+
+            return canvas.toDataURL('image/png');
+        }
+
+        function placeOrder() {
+            if (selectedItems.length === 0) return;
+
+            const subtotal = selectedItems.reduce((sum, item) => sum + item.price, 0);
+            let totalDiscount = 0;
+            
+            if (earlyBirdActive) totalDiscount += subtotal * 0.20;
+            if (appliedCoupon) totalDiscount += subtotal * appliedCoupon.discount;
+            
+            const finalTotal = subtotal - totalDiscount;
+
+            // Generate summary image
+            const imageDataUrl = generateSummaryImage();
+
+            // Create email body
+            const emailBody = `Hi Rodrigo!
+
+I'm very excited to join this great event through these options:
+
+SELECTED SPONSORSHIP PACKAGE:
+${selectedItems.map(item => `• ${item.name}: ${item.price.toLocaleString()} USD`).join('\n')}
+
+PRICING BREAKDOWN:
+Subtotal: ${subtotal.toLocaleString()} USD
+${earlyBirdActive ? `Early Bird Discount (20%): -${(subtotal * 0.20).toLocaleString()} USD\n` : ''}${appliedCoupon ? `${appliedCoupon.name}: -${(subtotal * appliedCoupon.discount).toLocaleString()} USD\n` : ''}
+TOTAL INVESTMENT: ${finalTotal.toLocaleString()} USD
+
+Please find attached the summary image with all details.
+
+I look forward to being part of this amazing blockchain event!
+
+Best regards!`;
+
+            // Create a downloadable link for the image
+            const link = document.createElement('a');
+            link.download = 'blockchain-summit-sponsorship-summary.png';
+            link.href = imageDataUrl;
+            
+            // Show modal with instructions
+            showOrderModal(emailBody, imageDataUrl);
+        }
+
+        function showOrderModal(emailBody, imageUrl) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+                padding: 20px;
+            `;
+
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: white;
+                border-radius: 15px;
+                padding: 30px;
+                max-width: 700px;
+                width: 100%;
+                max-height: 90vh;
+                overflow-y: auto;
+                position: relative;
+            `;
+
+            modalContent.innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <h2 style="color: #1e3c72; margin-bottom: 10px;">🎉 Excellent Choice!</h2>
+                    <p style="color: #6c757d; font-size: 1.1em;">Your sponsorship package is ready!</p>
+                </div>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                    <h3 style="color: #1e3c72; margin-bottom: 15px;">📧 Send your request:</h3>
+                    <div style="margin-bottom: 15px;">
+                        <strong>To:</strong> r@blockchainsummit.la<br>
+                        <strong>Subject:</strong> Blockchain Summit LATAM 2025 - Sponsorship Request
+                    </div>
+                    <textarea readonly style="width: 100%; height: 150px; padding: 15px; border: 2px solid #dee2e6; border-radius: 8px; font-family: monospace; font-size: 0.9em; resize: vertical;" id="emailContentArea">${emailBody}</textarea>
+                </div>
+
+                <div style="margin-bottom: 20px; text-align: center;">
+                    <h4 style="color: #1e3c72; margin-bottom: 10px;">📸 Summary Image (attach to email):</h4>
+                    <img src="${imageUrl}" style="max-width: 100%; border: 2px solid #dee2e6; border-radius: 8px;" id="summaryImage">
+                </div>
+
+                <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
+                    <button onclick="copyEmailContent()" style="background: #28a745; color: white; border: none; padding: 12px 20px; border-radius: 25px; font-weight: 600; cursor: pointer;">
+                        📋 Copy Email Text
+                    </button>
+                    <button onclick="downloadImage()" style="background: #2a5298; color: white; border: none; padding: 12px 20px; border-radius: 25px; font-weight: 600; cursor: pointer;">
+                        💾 Download Image
+                    </button>
+                    <a href="mailto:r@blockchainsummit.la?subject=Blockchain Summit LATAM 2025 - Sponsorship Request" target="_blank" style="background: #dc3545; color: white; text-decoration: none; padding: 12px 20px; border-radius: 25px; font-weight: 600; display: inline-block;">
+                        📧 Open Email
+                    </a>
+                    <button onclick="closeModal()" style="background: #6c757d; color: white; border: none; padding: 12px 20px; border-radius: 25px; font-weight: 600; cursor: pointer;">
+                        ❌ Close
+                    </button>
+                </div>
+
+                <div style="text-align: center; padding-top: 20px; border-top: 1px solid #dee2e6;">
+                    <p style="color: #6c757d; font-size: 0.9em;">
+                        💡 <strong>Instructions:</strong><br>
+                        1. Copy the email text<br>
+                        2. Download the summary image<br>
+                        3. Compose a new email to r@blockchainsummit.la<br>
+                        4. Paste the text and attach the image
+                    </p>
+                </div>
+            `;
+
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            window.currentModal = modal;
+            window.currentImageUrl = imageUrl;
+
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        }
+
+        function copyEmailContent() {
+            const textarea = document.getElementById('emailContentArea');
+            textarea.select();
+            textarea.setSelectionRange(0, 99999);
+            
+            try {
+                document.execCommand('copy');
+                const button = event.target;
+                const originalText = button.innerHTML;
+                button.innerHTML = '✅ Copied!';
+                button.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '#28a745';
+                }, 2000);
+            } catch (err) {
+                alert('Could not copy automatically. Please select and copy the text manually.');
+            }
+        }
+
+        function downloadImage() {
+            const link = document.createElement('a');
+            link.download = 'blockchain-summit-sponsorship-summary.png';
+            link.href = window.currentImageUrl;
+            link.click();
+        }
+
+        function closeModal() {
+            if (window.currentModal) {
+                document.body.removeChild(window.currentModal);
+                window.currentModal = null;
+                window.currentImageUrl = null;
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const brandingItems = document.querySelectorAll('.branding-item');
+            
+            brandingItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const name = this.getAttribute('data-name');
+                    const price = parseInt(this.getAttribute('data-price'));
+                    
+                    if (this.classList.contains('selected')) {
+                        this.classList.remove('selected');
+                        selectedItems = selectedItems.filter(item => item.id !== name);
+                    } else {
+                        this.classList.add('selected');
+                        selectedItems.push({
+                            id: name,
+                            name: name,
+                            price: price
+                        });
+                    }
+                    
+                    updateBudget();
+                });
+            });
+
+            // Allow enter key to apply coupon
+            document.getElementById('couponCode').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    applyCoupon();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
